@@ -1,5 +1,8 @@
+import 'package:emarket_mobile/Pages/loginPage.dart';
+import 'package:emarket_mobile/Pages/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MarketDrawer extends StatelessWidget {
   const MarketDrawer({super.key});
@@ -10,9 +13,63 @@ class MarketDrawer extends StatelessWidget {
       backgroundColor: Color.fromARGB(255, 0, 63, 2),
       child: Column(
         children: [
-          IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ,)), icon: Icon(Icons.person_add)),
-          IconButton(onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ,)), icon: Icon(Icons.lock_open)),
-          IconButton(onPressed: () =>, icon: Icon(FontAwesomeIcons.instagram))
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(FontAwesomeIcons.cartShopping),
+              Text(
+                "E-Market",
+                style: TextStyle(color: Colors.green),
+              )
+            ],
+          ),
+          const Divider(
+            color: Colors.grey,
+          ),
+          TextButton.icon(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => RegisterPage(),
+                  )),
+              icon: const Icon(
+                Icons.person_add_sharp,
+                color: Colors.white,
+              ),
+              label: const Text(
+                "Register",
+                style: TextStyle(color: Colors.white),
+              )),
+          TextButton.icon(
+              onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginPage(),
+                  )),
+              icon: const Icon(
+                Icons.lock_open,
+                color: Colors.white,
+              ),
+              label: const Text(
+                "Login",
+                style: TextStyle(color: Colors.white),
+              )),
+          IconButton(
+              onPressed: () async {
+                await launchUrl(Uri.parse("https://www.instagram.com/"));
+              },
+              icon: const Icon(
+                FontAwesomeIcons.instagram,
+                color: Colors.white,
+              )),
+          IconButton(
+              onPressed: () async {
+                await launchUrl(Uri.parse("https://www.twitter.com/"));
+              },
+              icon: const Icon(
+                FontAwesomeIcons.xTwitter,
+                color: Colors.white,
+              ))
         ],
       ),
     );
