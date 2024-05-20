@@ -8,7 +8,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: MarketDrawer(),
-      body: Column(),
+      body: Builder(
+        builder: (context) => Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            IconButton(
+                onPressed: () => Scaffold.of(context).openDrawer(),
+                icon: const Icon(Icons.menu))
+          ],
+        ),
+      ),
     );
   }
 }
