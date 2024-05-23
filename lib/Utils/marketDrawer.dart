@@ -1,8 +1,9 @@
-import 'package:emarket_mobile/Pages/loginPage.dart';
-import 'package:emarket_mobile/Pages/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../Pages/loginPage.dart';
+import '../Pages/registerPage.dart';
 
 class MarketDrawer extends StatelessWidget {
   const MarketDrawer({super.key});
