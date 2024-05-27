@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../Utils/marketDrawer.dart';
 
@@ -11,6 +12,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool isVerified = false;
+  bool isPasswordVerified = false;
   bool isUsernameOptionSelected = true;
   bool isPasswordHidden = true;
   TextEditingController usernameController = TextEditingController();
@@ -19,14 +21,27 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget usernameField() {
     return TextFormField(
+      decoration: InputDecoration(
+          icon: const Icon(Icons.person),
+          label: const Text("Username"),
+          suffixIcon: (isVerified
+              ? const Icon(Icons.check, color: Colors.black)
+              : const SizedBox.shrink())),
       autovalidateMode: AutovalidateMode.always,
       controller: usernameController,
       validator: (value) {
         if (usernameController.text.isNotEmpty) {
-          setState(() {
-            isVerified = true;
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isVerified = true;
+            });
           });
         } else {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isVerified = true;
+            });
+          });
           "This field can not be empty.";
         }
         return null;
@@ -48,10 +63,17 @@ class _LoginPageState extends State<LoginPage> {
         if (RegExp(
                 r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
             .hasMatch(emailController.text)) {
-          setState(() {
-            isVerified = true;
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isVerified = true;
+            });
           });
         } else {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isVerified = true;
+            });
+          });
           "Enter a valid email.";
         }
         return null;
@@ -75,12 +97,18 @@ class _LoginPageState extends State<LoginPage> {
       obscureText: isPasswordHidden,
       controller: passwordController,
       validator: (value) {
-        if (RegExp(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z\d]).{8,}")
-            .hasMatch(passwordController.text)) {
-          setState(() {
-            isVerified = true;
+        if (passwordController.text.isNotEmpty) {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isPasswordVerified = true;
+            });
           });
         } else {
+          SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+            setState(() {
+              isPasswordVerified = true;
+            });
+          });
           "This field can not be empty.";
         }
         return null;
@@ -106,10 +134,26 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      (isUsernameOptionSelected)
-                          ? usernameField()
-                          : emailField(),
-                      passwordField(),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width / 50),
+                          child: (isUsernameOptionSelected)
+                              ? usernameField()
+                              : emailField(),
+                        ),
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal:
+                                  MediaQuery.of(context).size.width / 50),
+                          child: passwordField(),
+                        ),
+                      ),
                       ElevatedButton(
                           onPressed: () {}, child: const Text("Login"))
                     ],
