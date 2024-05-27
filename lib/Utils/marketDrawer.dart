@@ -11,16 +11,24 @@ class MarketDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(255, 0, 63, 2),
+      backgroundColor: const Color.fromARGB(255, 0, 63, 2),
       child: Column(
         children: [
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(FontAwesomeIcons.cartShopping),
-              Text(
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: MediaQuery.of(context).size.width / 100),
+                child: Icon(
+                  FontAwesomeIcons.cartShopping,
+                  size: MediaQuery.of(context).size.width / 35,
+                  color: const Color.fromRGBO(202, 255, 202, 1),
+                ),
+              ),
+              const Text(
                 "E-Market",
-                style: TextStyle(color: Colors.green),
+                style: TextStyle(color: Colors.white),
               )
             ],
           ),
