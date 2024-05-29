@@ -127,36 +127,42 @@ class _LoginPageState extends State<LoginPage> {
               IconButton(
                   onPressed: () => Scaffold.of(context).openDrawer(),
                   icon: const Icon(Icons.menu)),
-              Center(
-                child: Container(
-                  decoration: const BoxDecoration(
-                      color: Color.fromRGBO(196, 232, 210, 0.368)),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width / 50),
-                          child: (isUsernameOptionSelected)
-                              ? usernameField()
-                              : emailField(),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: MediaQuery.of(context).size.height / 5),
+                child: Center(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: Color.fromRGBO(196, 232, 210, 0.368)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 50),
+                            child: (isUsernameOptionSelected)
+                                ? usernameField()
+                                : emailField(),
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal:
-                                  MediaQuery.of(context).size.width / 50),
-                          child: passwordField(),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    MediaQuery.of(context).size.width / 50),
+                            child: passwordField(),
+                          ),
                         ),
-                      ),
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text("Login"))
-                    ],
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 50),
+                        ElevatedButton(
+                            onPressed: () {}, child: const Text("Login"))
+                      ],
+                    ),
                   ),
                 ),
               )
