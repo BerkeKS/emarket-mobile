@@ -1,3 +1,5 @@
+import 'package:emarket_mobile/Pages/registerPage.dart';
+import 'package:emarket_mobile/Service/userService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -159,8 +161,31 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         SizedBox(
                             height: MediaQuery.of(context).size.height / 50),
-                        ElevatedButton(
-                            onPressed: () {}, child: const Text("Login"))
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (isVerified & isPasswordVerified) {
+                                    if (isUsernameOptionSelected) {
+                                      usernameLogin(usernameController.text,
+                                          passwordController.text);
+                                    } else {
+                                      emailLogin(emailController.text,
+                                          passwordController.text);
+                                    }
+                                  }
+                                },
+                                child: const Text("Login")),
+                            TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => RegisterPage(),
+                                    )),
+                                child: const Text("Don't have an account?"))
+                          ],
+                        )
                       ],
                     ),
                   ),

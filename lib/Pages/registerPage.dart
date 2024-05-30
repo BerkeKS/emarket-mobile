@@ -1,6 +1,9 @@
+import 'package:emarket_mobile/Pages/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
+import '../Models/user.dart';
+import '../Service/userService.dart';
 import '../Utils/marketDrawer.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -248,6 +251,37 @@ class _RegisterPageState extends State<RegisterPage> {
                                     MediaQuery.of(context).size.width / 50),
                             child: ageField(),
                           ),
+                        ),
+                        SizedBox(
+                            height: MediaQuery.of(context).size.height / 50),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (isUsernameVerified &
+                                      isEmailVerified &
+                                      isPasswordVerified &
+                                      isFullnameVerified &
+                                      isAgeVerified) {
+                                    User user = User(
+                                        usernameController.text,
+                                        emailController.text,
+                                        passwordController.text,
+                                        fullnameController.text,
+                                        int.parse(ageController.text));
+                                    register(user);
+                                  }
+                                },
+                                child: const Text("Login")),
+                            TextButton(
+                                onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => LoginPage(),
+                                    )),
+                                child: const Text("Already have an account?"))
+                          ],
                         )
                       ],
                     ),
