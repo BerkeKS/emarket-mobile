@@ -4,4 +4,5 @@ class User {
   String? password;
   String? fullName;
   int? age;
+  User(this.username, this.email, this.password, this.fullName, this.age);
 }
