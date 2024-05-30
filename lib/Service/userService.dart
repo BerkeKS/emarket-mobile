@@ -13,20 +13,20 @@ Future<void> register(User user) async {
   if (res.statusCode == 200) {}
 }
 
-Future<void> usernameLogin(User user) async {
+Future<void> usernameLogin(String username, String password) async {
   var res =
       await http.post(Uri.parse("http://localhost:5123/usernamelogin"), body: {
-    "username": user.username,
-    "password": user.password,
+    "username": username,
+    "password": password,
   });
   if (res.statusCode == 200) {}
 }
 
-Future<void> emailLogin(User user) async {
+Future<void> emailLogin(String email, String password) async {
   var res =
       await http.post(Uri.parse("http://localhost:5123/emaillogin"), body: {
-    "email": user.email,
-    "password": user.password,
+    "email": email,
+    "password": password,
   });
   if (res.statusCode == 200) {}
 }
